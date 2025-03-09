@@ -20,9 +20,6 @@ function init(){
           allData = data
           setupSelector()
           
-          // Initial rendering steps:
-          // P.S. You could move these into setupSelector(), 
-          // but calling them separately makes the flow clearer.
         
       })
   .catch(error => console.error('Error loading data:', error));
@@ -51,30 +48,37 @@ function setupSelector(){
   // Anytime the user tweaks something, this function reacts.
   // May need to call updateAxes() and updateVis() here when needed!
   
-  d3.select('#settingVariable').property('value', settingVariable)
-  d3.select('#distinctionVariable').property('value', distinctionVariable)
-  d3.select('#settingVariable')
-  .data(settingOptions)
-  .enter()
-  .append('option')
-  .text(d => d) // The displayed text
-  .attr("value",d => d) // The actual value used in the code
-  d3.select('#distinctionVariable')
-    .data(distTypeOptions)
-    .enter()
-    .append('option')
-    .text(d => d) // The displayed text
-    .attr("value",d => d) // The actual value used in the code
-    .on("change", function (event) {
-      
-      //xVar= d3.select('#xVariable').property('value')
-      //yVar=d3.select('#yVariable').property('value')
-     
-  })
+    d3.select('#settingVariable').property('value', settingVariable)
+    d3.select('#distinctionVariable').property('value', distinctionVariable)
+    d3.select('#settingVariable')
+      .selectAll('option') // Select all option elements inside the dropdown
+      .data(settingOptions) // Bind data array
+      .enter()
+      .append('option') // Create <option> elements
+      .text(d => d) // Set visible text
+      .attr("value", d => d) // Set value attribute
+      .on("change", function (event) {
+        settingVariable = d3.select('#settingVariable').property('value');
+        distinctionVariable = d3.select('#distinctionVariable').property('value');
+        updateVis();
+          });
+    d3.select('#distinctionVariable')
+      .selectAll('option') // Select all option elements inside the dropdown
+      .data(distTypeOptions) // Bind data array
+      .enter()
+      .append('option') // Create <option> elements
+      .text(d => d) // Set visible text
+      .attr("value", d => d) // Set value attribute
+      .on("change", function (event) {
+          settingVariable = d3.select('#settingVariable').property('value');
+          distinctionVariable = d3.select('#distinctionVariable').property('value');
+          updateVis();
+        
+      });
 
 
 }
-
+function updateVis(){}
 // Create SVG
 const svg = d3.select('#vis')
   .append('svg')
