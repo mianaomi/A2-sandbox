@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A2: Interactive Visualization</title>
+    
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <h1>Chicago Crime Setting Reports By Police District</h1>
     <h2>Mia Cohen, Saurav Patel</h2>
-
+    
     <div class="container">
-        <!-- Dropdown container -->
+        <p>Welcome to our page. For this interactive visualization, we used crime report data from <a href="https://data.cityofchicago.org/stories/s/Crimes-2001-to-present-Dashboard/5cd6-ry5g">Chicago Police Department's report statistics</a>
+            for citizen-reported crimes. There were many calls, so we looked specifically at the year 2024 for this map. We counted both the number of crimes and the settings described in the reporting of the crimes. You can use the dropdown menu to select a specific setting
+            and see the data on hovering above the district. A darker red means a higher number/concentration in this district, building on the map examples on the CPD's website. 
+            
+
+            We chose red for our heatmap shade becuase it's a good color to indicate intensite, and the blue for mouseover to 
+            distinguish it from the red districts We considered a dot-plot with or segmented bar graphs, but ultimately landed on 
+            a map for maximum intuitiveness. 
+        </p> <br>     
+            
         <div class="dropdown-container">
             <label for="settingDropdown">Select Setting:</label>
             <select id="settingDropdown" class="variable"></select>
@@ -22,8 +32,15 @@
         <div class="map-container">
             <svg id="map" width="800" height="600"></svg>
         </div>
+        <p>The process of developing this was a joint effort, with about 10 man-hours in 
+            total work. Both members of the team participated in data selection, collection, and trimming as well as programming the interactive elements of the site. Mia individually handled site structre, initialization, and writing while 
+            Saurav individually handled the heatmap. Getting the heatmap live and so was ensuring webpage responsiveness were the most time-consuming tasks.
+
+        </p> <br>
+        <p>Notice: AI was used in this project for debugging purposes.</p>
+    
     </div>
-    <p>WRITEUP GOES HERE</p>
+    
     <div class="tooltip"></div>
 
     <script src="js/script.js"></script>

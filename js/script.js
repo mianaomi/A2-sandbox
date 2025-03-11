@@ -137,15 +137,17 @@ function drawMap() {
     })
 
     // Fix Tooltip to Use Correct Selected Dropdown Option
-    // Mouse over highlights it to orange 
+    // Mouse over highlights it to blue 
     .on("mouseover", function (event, d) {
         let districtNumber = +d.properties.dist_num;
-        let selectedSetting = d3.select("#settingDropdown").property("value"); // ✅ Get latest dropdown selection
+        let selectedSetting = d3.select("#settingDropdown").property("value"); 
         let crimeCount = crimeCounts[districtNumber]?.[selectedSetting] || 0;
         let totalCrimes = crimeCounts[districtNumber]?.["Total Crimes"] || 0;
 
         console.log(`Tooltip - District ${districtNumber}: ${selectedSetting} Crimes = ${crimeCount}`);
-
+        d3.select(this) 
+            .style('stroke', 'black')
+            .style('stroke-width', '4px')
         d3.select(".tooltip")
             .style("visibility", "visible")
             .html(`<strong>District ${districtNumber}</strong><br><strong>${selectedSetting} Crimes:</strong> ${crimeCount}<br><strong>Total Crimes:</strong> ${totalCrimes}`)
@@ -160,11 +162,13 @@ function drawMap() {
     })
     .on("mouseout", function () {
         d3.select(".tooltip").style("visibility", "hidden");
+        d3.select(this) // Refers to the hovered circle
+        .style('stroke', 'black')
+         .style('stroke-width', '1px')
     });
 
     console.log("Map initialized with crime data.");
 }
-
 
 // Function to Update Map Based on Dropdown Selection
 function updateMap() {
@@ -192,7 +196,6 @@ function updateMap() {
             let districtNumber = +d.properties.dist_num;
             let crimeCount = crimeCounts[districtNumber]?.[selectedSetting] || 0;
 
-            // ✅ Apply Red Color Scale (Higher Crime = Darker Red)
             let intensity = Math.round((255 * crimeCount) / maxCrimeCount);
             let r = 255;
             let g = 255 - intensity;
