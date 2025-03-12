@@ -1,5 +1,5 @@
 // Global: Dropdown menu options
-const settingOptions = ['ALL CRIMES', 'ABANDONED BUILDING', 'AIRCRAFT', 'AIRPORT BUILDING NON-TERMINAL - NON-SECURE AREA',
+const settingOptions = ['ALL LOCATIONS', 'ABANDONED BUILDING', 'AIRCRAFT', 'AIRPORT BUILDING NON-TERMINAL - NON-SECURE AREA',
     'AIRPORT BUILDING NON-TERMINAL - SECURE AREA', 'AIRPORT EXTERIOR - NON-SECURE AREA', 'AIRPORT EXTERIOR - SECURE AREA',
     'AIRPORT PARKING LOT', 'AIRPORT TERMINAL LOWER LEVEL - NON-SECURE AREA', 'AIRPORT TERMINAL LOWER LEVEL - SECURE AREA',
     'AIRPORT TERMINAL MEZZANINE - NON-SECURE AREA', 'AIRPORT TERMINAL UPPER LEVEL - NON-SECURE AREA',
@@ -68,7 +68,7 @@ Promise.all([
         });
 
         // Assign "ALL CRIMES" to use "Total Crimes"
-        crimeCounts[districtNum]["ALL CRIMES"] = +d["Total Crimes"] || 0;
+        crimeCounts[districtNum]["ALL LOCATIONS"] = +d["Total Crimes"] || 0;
     });
 
     console.log("Crime Data Loaded:", crimeCounts); // Debugging to make sure data is loaded
@@ -150,7 +150,7 @@ function drawMap() {
             .style('stroke-width', '4px')
         d3.select(".tooltip")
             .style("visibility", "visible")
-            .html(`<strong>District ${districtNumber}</strong><br><strong>${selectedSetting} Crimes:</strong> ${crimeCount}<br><strong>Total Crimes:</strong> ${totalCrimes}`)
+            .html(`<strong>DISTRICT ${districtNumber}</strong><br><strong>CRIMES IN ${selectedSetting}:</strong> ${crimeCount}<br><strong>TOTAL CRIMES IN DISTRICT:</strong> ${totalCrimes}`)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 10) + "px");
     })
